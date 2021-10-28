@@ -1,0 +1,125 @@
+object RobotWorld: TRobotWorld
+  Left = 814
+  Height = 650
+  Top = 160
+  Width = 898
+  Caption = 'RobotWorld'
+  ClientHeight = 650
+  ClientWidth = 898
+  DesignTimePPI = 144
+  OnMouseDown = FormMouseDown
+  OnMouseUp = FormMouseUp
+  OnPaint = FormPaint
+  LCLVersion = '2.0.12.0'
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 36
+    Top = 614
+    Width = 898
+    Panels = <    
+      item
+        Width = 240
+      end    
+      item
+        Width = 240
+      end    
+      item
+        Width = 240
+      end>
+    ParentFont = False
+    SimplePanel = False
+  end
+  object ReStart: TButton
+    Left = 10
+    Height = 37
+    Top = 10
+    Width = 113
+    Caption = 'Re&Start'
+    OnClick = ReStartClick
+    ParentFont = False
+    TabOrder = 1
+  end
+  object TBVel: TTrackBar
+    Left = 134
+    Height = 37
+    Top = 10
+    Width = 150
+    Min = -10
+    OnChange = TBVelChange
+    Position = 0
+    ParentFont = False
+    TabOrder = 2
+  end
+  object TBOmega: TTrackBar
+    Left = 278
+    Height = 37
+    Top = 10
+    Width = 150
+    Min = -10
+    OnChange = TBVelChange
+    Position = 0
+    ParentFont = False
+    TabOrder = 3
+  end
+  object TBV1: TTrackBar
+    Left = 557
+    Height = 37
+    Top = 10
+    Width = 150
+    Max = 20
+    Min = -20
+    OnChange = TBV1Change
+    Position = 0
+    ParentFont = False
+    TabOrder = 4
+  end
+  object TBV2: TTrackBar
+    Left = 720
+    Height = 37
+    Top = 10
+    Width = 150
+    Max = 20
+    Min = -20
+    OnChange = TBV1Change
+    Position = 0
+    ParentFont = False
+    TabOrder = 5
+  end
+  object velocity: TLabel
+    Left = 200
+    Height = 25
+    Top = 48
+    Width = 23
+    Caption = 'Vel'
+    ParentColor = False
+  end
+  object Omega: TLabel
+    Left = 327
+    Height = 25
+    Top = 48
+    Width = 59
+    Caption = 'Omega'
+    ParentColor = False
+  end
+  object v1: TLabel
+    Left = 624
+    Height = 25
+    Top = 48
+    Width = 19
+    Caption = 'v1'
+    ParentColor = False
+  end
+  object v2: TLabel
+    Left = 784
+    Height = 25
+    Top = 48
+    Width = 19
+    Caption = 'v2'
+    ParentColor = False
+  end
+  object Timer: TTimer
+    OnTimer = TimerTimer
+    Left = 19
+    Top = 48
+  end
+end
