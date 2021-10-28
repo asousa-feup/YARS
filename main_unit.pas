@@ -84,7 +84,10 @@ uses math;
 
 const RadiusOfRobot=20; // pix
       b = RadiusOfRobot;
-      dt=1; // sec
+      dt=0.1; // sec
+      WheelSize = 4;
+      Scale     = 2; // Canvas2WorldScale
+
 
 
 var
@@ -99,7 +102,21 @@ begin
   with self do begin
     WorldCanvas.Pen.Color := col;
     WorldCanvas.EllipseC(round(x*2),round(y*2),RadiusOfRobot,RadiusOfRobot);
-    WorldCanvas.Line(round(x*2),round(y*2), round(x*2+cos(Theta)*RadiusOfRobot),round(y*2 - sin(Theta)*RadiusOfRobot));
+    WorldCanvas.EllipseC(
+                         round(x*2-cos(Theta+pi/2)*RadiusOfRobot),round(y*2+sin(Theta+pi/2)*RadiusOfRobot),
+                         4,4);
+    WorldCanvas.EllipseC(
+                         round(x*2-cos(Theta-pi/2)*RadiusOfRobot),round(y*2+sin(Theta-pi/2)*RadiusOfRobot),
+                         4,4);
+    WorldCanvas.Line(
+                     round(x*2-cos(Theta)*RadiusOfRobot),round(y*2+sin(Theta)*RadiusOfRobot),
+                     round(x*2+cos(Theta)*RadiusOfRobot),round(y*2-sin(Theta)*RadiusOfRobot)
+                     );
+    WorldCanvas.Pen.Width := 4;
+    WorldCanvas.Line(
+                     round(x*2+cos(Theta)*RadiusOfRobot*0.5),round(y*2-sin(Theta)*RadiusOfRobot*0.5),
+                     round(x*2+cos(Theta)*RadiusOfRobot    ),round(y*2-sin(Theta)*RadiusOfRobot    )
+                     );
     WorldCanvas.Pen.Color := clGreen;
     WorldCanvas.Pen.Width := 5;
     WorldCanvas.Line(50,150, RobotWorld.Width-50,150);
@@ -198,7 +215,7 @@ procedure TRobotWorld.TBVelChange(Sender: TObject);
 begin
   with Robot do begin
     Vel    :=TBVel.  Position*2;
-    Omega:=TBOmega.Position/10;
+    Omega:=TBOmega.Position/100;
 
     // example: https://core.ac.uk/download/pdf/153415731.pdf
     //2v=v1+v2 ; bw=v1-v2
@@ -212,10 +229,15 @@ begin
 end;
 
 
+function RadToDeg(radians : double) : double;
+begin
+  RadToDeg:=radians/pi*180;
+end;
+
 procedure TRobotWorld.UpdateStatusBar();
 begin
   with Robot do begin
-    RobotWorld.StatusBar1.Panels[0].Text := Format('x,y,t=(%2.1f,%2.1f,%2.1f)',[x,y,Theta]);
+    RobotWorld.StatusBar1.Panels[0].Text := Format('x,y,t=(%2.1f,%2.1f,%4.1f)',[x,y,RadToDeg(Theta)]);
     RobotWorld.StatusBar1.Panels[1].Text := Format('v,w=(%2.1f,%2.1f)',[Vel,Omega]);
     RobotWorld.StatusBar1.Panels[2].Text := Format('v1,v2=(%2.1f,%2.1f)',[v1,v2]);
   end;

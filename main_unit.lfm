@@ -55,7 +55,8 @@ object RobotWorld: TRobotWorld
     Height = 37
     Top = 10
     Width = 150
-    Min = -10
+    Max = 314
+    Min = -314
     OnChange = TBVelChange
     Position = 0
     ParentFont = False
@@ -118,6 +119,7 @@ object RobotWorld: TRobotWorld
     ParentColor = False
   end
   object Timer: TTimer
+    Interval = 251
     OnTimer = TimerTimer
     Left = 19
     Top = 48
